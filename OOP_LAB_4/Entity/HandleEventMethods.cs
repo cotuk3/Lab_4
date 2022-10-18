@@ -14,9 +14,11 @@ internal static class HandleEventMethods
             if(c >= 97 && c <= 122)
                 amount++;
         }
-        Console.WriteLine(e.Car.Name + $" exceeded max speed {e.Car._maxSpeed} on {e.TimeOfExcess.ToLongTimeString()}");
-        Console.WriteLine($"Car name {e.Car.Name} has {amount} lower case letters\n");
+
+        Console.WriteLine($"Anonymous Method: Car name {e.Car.Name} has {amount} lower case letters\n");
     };
 
+    public static EventHandler<CarEventArgs> TimeWhenExceeded = (object? sender, CarEventArgs e) =>
+    Console.WriteLine($"Lambda operator: {e.Car.Name} exceeded max speed {e.Car._maxSpeed} on {e.TimeOfExcess.ToLongTimeString()};");
 
 }
