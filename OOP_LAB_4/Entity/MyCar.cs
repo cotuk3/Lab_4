@@ -20,29 +20,6 @@ internal class MyCar // 2.клас в якому генерується поді
         Name = name;
     }
 
-    #region Fuel
-
-    public void Refueling(double gasAmount = -1)
-    {
-        if(gasAmount == -1)
-            _currentFuelAmount = _fuelCapacity;
-        else
-            _currentFuelAmount += gasAmount;
-
-        if(_currentFuelAmount > _fuelCapacity)
-            _currentFuelAmount = _fuelCapacity;
-    }
-
-    public void FuelСonsumption(double coefficient = 1) // TODO : check if lower than 0
-    {
-        _currentFuelAmount -= 3 * coefficient;
-        if(_currentFuelAmount <= 0)
-        {
-            throw new Exception("Your car is out of fuel");
-        }
-    }
-
-    #endregion
 
     #region Properties
 
@@ -118,6 +95,31 @@ internal class MyCar // 2.клас в якому генерується поді
     }
 
     #endregion
+
+    #region Fuel
+
+    public void Refueling(double gasAmount = -1)
+    {
+        if(gasAmount == -1)
+            _currentFuelAmount = _fuelCapacity;
+        else
+            _currentFuelAmount += gasAmount;
+
+        if(_currentFuelAmount > _fuelCapacity)
+            _currentFuelAmount = _fuelCapacity;
+    }
+
+    public void FuelСonsumption(double coefficient = 1) // TODO : check if lower than 0
+    {
+        _currentFuelAmount -= 2 * coefficient;
+        if(_currentFuelAmount <= 0)
+        {
+            throw new Exception("Your car is out of fuel");
+        }
+    }
+
+    #endregion
+
     private void OnMaximumSpeedExcess(MyCar myCar, TimeOnly time)
     {
         if(MyEvent != null)
@@ -129,6 +131,7 @@ internal class MyCar // 2.клас в якому генерується поді
 
     public override string ToString()
     {
-        return $"{Name} : {_currentSpeed} km/h, {_currentFuelAmount} l.";
+        return $"{Name} : curr: {_currentSpeed} km/h, max: {_maxSpeed} km/h\n" +
+               $"\t\tcurr: {_currentFuelAmount} l, max: {_fuelCapacity} l.";
     }
 }
