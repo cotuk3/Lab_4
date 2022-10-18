@@ -165,10 +165,12 @@ internal class MyConsoleMenu : ConsoleMenu.ConsoleMenu
         }
         AddHandlers();
     }
-
+    
     private void AddHandlers()
     {
+        car.MyEvent += HandleEventMethods.TimeWhenExceeded;
         car.MyEvent += HandleEventMethods.AmountOfLowerCaseLetters;
+
         car.MyEvent += (sender, e) =>
         {
             int amount = 0;
@@ -177,7 +179,7 @@ internal class MyConsoleMenu : ConsoleMenu.ConsoleMenu
                 if(c >= 97 && c <= 122)
                     amount++;
             }
-            Console.WriteLine(e.Car.Name + $" exceeded max speed {e.Car._maxSpeed} on {e.TimeOfExcess.ToLongTimeString()}");
+            Console.WriteLine($"Lambda expression: {e.Car.Name} exceeded max speed {e.Car._maxSpeed} on {e.TimeOfExcess.ToLongTimeString()}");
             Console.WriteLine($"Car name {e.Car.Name} has {amount} lower case letters");
         };
     }
